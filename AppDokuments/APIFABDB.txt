@@ -1,0 +1,82 @@
+Kotlin how to get data from an Web API
+
+
+
+
+// Overview Fragment -> Overview ViewModel -> Retrofit Service
+
+// REST architecture : REpresentational State Transfer
+// use Retrofit external librarie
+
+build.gradle(Project: xxx)
+repositories {
+   google() 
+   jcenter()
+}
+
+build.gradle (Module: xxx )
+
+// Retrofit 
+implementation "com.squareup.retrofit2:retrofit:2.9.0"
+// Retrofit with Moshi Converter
+implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
+
+// add support for java 8 
+build.gradle(Module: xxx )
+
+android {
+  ...
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  
+  kotlinOptions {
+    jvmTarget = '1.8'
+  }
+}
+
+Create a network layer, the FABDBApiService class.
+Create a Retrofit object with the base URL and the converter factory.
+Create an interface that explains how Retrofit talks to our web server.
+Create a Retrofit service and expose the instance to the api service to the rest of the app.
+
+new package called network
+new  FABDBApiService.kt // where i create some singletons objects 
+
+
+   
+  // Accepted formats:
+  
+  Accept: application/json   <- this one will be used with Moshi Librari
+  Accept: application/xml
+  Accept: text/csv
+  
+  
+// no class but kotlin file: 
+ 
+FABDBApiService.kt
+
+private const val BASE_URL = "https://fabdb.net/"
+   
+private val retrofit = Retrofit.Builder()
+.addConverterFactory(ScalarsConverterFactory.create()).baseUrl(BASE_URL)
+   .build()
+ 
+interface FABDBApiService{
+@GET ("cards")
+fun getCards() : String
+ 
+}
+ 
+ // in Kotlin the object keyword declares a singleton
+ 
+ object FabApi {
+ 
+ val retrofitService : FABDBApiService by lazy { 
+	retrofit.create(FABDBApiService::class.java)
+       }
+ 
+  
+
