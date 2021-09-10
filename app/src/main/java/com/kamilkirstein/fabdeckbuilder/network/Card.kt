@@ -36,7 +36,7 @@ Example response:
 data class Card(
     val identifier: String,
 
-    @Json(name ="identifier") val id : String,
-    @Json(name = "name") val name: String,
-    @Json(name = "image") val imgUrl: String
+    @Json(name ="identifier") val id : String?,
+    @Json(name = "name") val name: String?,
+    @Json(name = "image") val imgUrl: String?
 )

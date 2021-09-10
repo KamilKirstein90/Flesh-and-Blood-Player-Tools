@@ -17,6 +17,8 @@ enum class FabDBAPIStatus { LOADING, ERROR, DONE }
  */
 class OverviewViewModel : ViewModel() {
 
+    private var _pageNumber : Int = 0;
+
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<FabDBAPIStatus>()
 
@@ -56,5 +58,35 @@ class OverviewViewModel : ViewModel() {
                 _cards.value = listOf()
             }
         }
+    }
+
+    public fun getCardsForPage( page : Int){
+        viewModelScope.launch {
+            _status.value = FabDBAPIStatus.LOADING
+            try {
+                _cards.value = FabDbAPI.retrofitService.getCardsForPage(page).cardsData
+                Log.i("response", _cards.value.toString())
+                _status.value = FabDBAPIStatus.DONE
+            } catch (e: Exception) {
+                _status.value = FabDBAPIStatus.ERROR
+                Log.i("response", "No Response")
+                Log.e("Why no Response:", e.toString())
+                _cards.value = listOf()
+            }
+        }
+    }
+
+    fun pageNumber():Int {return this._pageNumber
+    }
+
+    public fun nextPage(){
+        ++_pageNumber
+    }
+
+    public fun prevPage(){
+        if(_pageNumber == 0)
+            return;
+        --_pageNumber;
+
     }
 }

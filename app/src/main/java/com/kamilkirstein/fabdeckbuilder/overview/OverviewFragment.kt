@@ -19,15 +19,17 @@ package com.kamilkirstein.fabdeckbuilder.overview
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.kamilkirstein.fabdeckbuilder.R
 import com.kamilkirstein.fabdeckbuilder.databinding.FragmentOverviewBinding
 
 /**
  * This fragment shows the the status of the Mars photos web services transaction.
  */
-class OverviewFragment : Fragment() {
+class OverviewFragment : Fragment(), OnClickListener {
 
     private val viewModel: OverviewViewModel by viewModels()
 
@@ -49,7 +51,24 @@ class OverviewFragment : Fragment() {
 
         // Sets the adapter of the photosGrid RecyclerView
         binding.photosGrid.adapter = PhotoGridAdapter()
-
+        binding.btnNextPage.setOnClickListener(this);
+        binding.btnPrevPage.setOnClickListener(this);
         return binding.root
+    }
+
+    override fun onClick(v: View?) {
+
+        when (v?.id) {
+        R.id.btnNextPage -> {
+            viewModel.nextPage()
+            viewModel.getCardsForPage(viewModel.pageNumber())
+        }
+        R.id.btnPrevPage -> {
+            viewModel.prevPage()
+            viewModel.getCardsForPage(viewModel.pageNumber())
+        }
+        else -> {
+        }
+    }
     }
 }
