@@ -5,4 +5,14 @@
     <string name="title_notifications">Notifications</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="Sets">
+        <item>WTR</item>
+        <item>ARC</item>
+        <item>CRU</item>
+        <item>MON</item>
+        <item>ELE</item>
+    </string-array>
+
+
 </resources>

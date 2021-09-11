@@ -75,7 +75,7 @@ interface FabDbApiService {
     suspend fun getCardsForPage(@Query("page") page : Int) : ListOfCards
 
     @GET("cards?per_page=25")
-    suspend fun getCardsOfSet(@Query("set") set : String) : ListOfCards
+    suspend fun getCardsOfSet(@Query("set") set : String?) : ListOfCards
 
 }
 

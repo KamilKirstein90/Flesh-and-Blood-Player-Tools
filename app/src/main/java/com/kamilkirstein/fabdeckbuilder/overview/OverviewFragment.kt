@@ -21,6 +21,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kamilkirstein.fabdeckbuilder.R
@@ -32,6 +35,7 @@ import com.kamilkirstein.fabdeckbuilder.databinding.FragmentOverviewBinding
 class OverviewFragment : Fragment(), OnClickListener {
 
     private val viewModel: OverviewViewModel by viewModels()
+
 
     /**
      * Inflates the layout with Data Binding, sets its lifecycle owner to the OverviewFragment
@@ -51,24 +55,62 @@ class OverviewFragment : Fragment(), OnClickListener {
 
         // Sets the adapter of the photosGrid RecyclerView
         binding.photosGrid.adapter = PhotoGridAdapter()
+
+        // set the  onClicklistener to the buttons
         binding.btnNextPage.setOnClickListener(this);
         binding.btnPrevPage.setOnClickListener(this);
+
+
+        // access the spinner
+        val spinner = binding.spinnerSets;
+        if (spinner != null) {
+
+            val adapter = activity?.let {
+                ArrayAdapter.createFromResource(
+                    it?.baseContext, R.array.Sets,
+                    android.R.layout.simple_spinner_item
+                )
+            }
+
+            if (adapter != null) {
+                spinner.adapter = adapter
+            }
+            val sets = R.array.Sets
+            spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View, position: Int, id: Long
+                ) {
+                    viewModel.getCardsOfSet(spinner.selectedItem.toString())
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+
+            }
+        }
+
         return binding.root
     }
 
     override fun onClick(v: View?) {
 
         when (v?.id) {
-        R.id.btnNextPage -> {
-            viewModel.nextPage()
-            viewModel.getCardsForPage(viewModel.pageNumber())
+            R.id.btnNextPage -> {
+                viewModel.nextPage()
+                viewModel.getCardsForPage(viewModel.pageNumber())
+            }
+            R.id.btnPrevPage -> {
+                viewModel.prevPage()
+                viewModel.getCardsForPage(viewModel.pageNumber())
+            }
+            else -> {
+            }
         }
-        R.id.btnPrevPage -> {
-            viewModel.prevPage()
-            viewModel.getCardsForPage(viewModel.pageNumber())
-        }
-        else -> {
-        }
-    }
     }
 }
+
+
+
