@@ -11,7 +11,7 @@ import com.kamilkirstein.fabdeckbuilder.network.FabDbAPI
 import com.kamilkirstein.fabdeckbuilder.network.Data
 import kotlinx.coroutines.launch
 
-enum class FabDBAPIStatus { LOADING, ERROR, DONE }
+enum class FabDBAPIStatus { LOADING, ERROR, DONE, NOTHING_FOUND }
 
 /**
  * The [ViewModel] that is attached to the [OverviewFragment].
@@ -21,7 +21,6 @@ class OverviewViewModel : ViewModel() {
     private var _pageNumber : Int = 0
     private var _set : String? = null
     public var _cardFilter = CardFilter()
-
 
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<FabDBAPIStatus>()
@@ -48,17 +47,21 @@ class OverviewViewModel : ViewModel() {
      * [MarsPhoto] [List] [LiveData].
      */
     private fun getCards() {
-
         viewModelScope.launch {
             _status.value = FabDBAPIStatus.LOADING
             try {
+
                 _cards.value = FabDbAPI.retrofitService.getCards().cardsData
-                Log.i("response", _cards.value.toString())
-                _status.value = FabDBAPIStatus.DONE
+
+                if (_cards.value.isNullOrEmpty()) {
+                    _status.value = FabDBAPIStatus.NOTHING_FOUND
+                }
+                else {
+                    _status.value = FabDBAPIStatus.DONE
+                }
+
             } catch (e: Exception) {
                 _status.value = FabDBAPIStatus.ERROR
-                Log.i("response", "No Response")
-                Log.e("Why no Response:", e.toString())
                 _cards.value = listOf()
             }
         }

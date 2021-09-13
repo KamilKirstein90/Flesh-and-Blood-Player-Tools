@@ -1,7 +1,7 @@
 package com.kamilkirstein.fabdeckbuilder.datafilter
 
 enum class KeyWords(val keyWord : String) {
-
+    KEYWORDS_ALL("all"),
     KEYWORDS_GENERIC("generic"),
     KEYWORDS_BRUTE("brute"),
     KEYWORDS_GUARDIAN("guardian"),
@@ -10,6 +10,7 @@ enum class KeyWords(val keyWord : String) {
     KEYWORDS_RANGER("ranger"),
     KEYWORDS_RUNEBLADE("runeblade"),
     KEYWORDS_WARRIOR("warrior"),
+    KEYWORDS_WIZARD("wizard"),
     KEYWORDS_LIGHT("light"),
     KEYWORDS_SHADOW("shadow"),
     KEYWORDS_ELEMENTAL("elemental"),

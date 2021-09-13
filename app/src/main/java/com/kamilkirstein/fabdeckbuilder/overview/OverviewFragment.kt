@@ -38,9 +38,9 @@ import com.kamilkirstein.fabdeckbuilder.datafilter.KeyWords
 class OverviewFragment : Fragment(), OnClickListener {
 
     private val viewModel: OverviewViewModel by viewModels()
-
     // array for the class selection spinner
     val classes = arrayListOf<KeyWords>(
+        KeyWords.KEYWORDS_ALL,
         KeyWords.KEYWORDS_GENERIC,
         KeyWords.KEYWORDS_BRUTE,
         KeyWords.KEYWORDS_GUARDIAN,
@@ -48,9 +48,17 @@ class OverviewFragment : Fragment(), OnClickListener {
         KeyWords.KEYWORDS_NINJA,
         KeyWords.KEYWORDS_RANGER,
         KeyWords.KEYWORDS_RUNEBLADE,
-        KeyWords.KEYWORDS_WARRIOR
+        KeyWords.KEYWORDS_WARRIOR,
+        KeyWords.KEYWORDS_WIZARD
     )
-
+    val talents = arrayListOf<KeyWords>(
+        KeyWords.KEYWORDS_LIGHT,
+        KeyWords.KEYWORDS_SHADOW,
+        KeyWords.KEYWORDS_ELEMENTAL,
+        KeyWords.KEYWORDS_EARTH,
+        KeyWords.KEYWORDS_ICE,
+        KeyWords.KEYWORDS_LIGHTNING
+    )
     /**
      * Inflates the layout with Data Binding, sets its lifecycle owner to the OverviewFragment
      * to enable Data Binding to observe LiveData, and sets up the RecyclerView with an adapter.
@@ -95,9 +103,13 @@ class OverviewFragment : Fragment(), OnClickListener {
                     parent: AdapterView<*>,
                     view: View, position: Int, id: Long
                 ) {
-                    // when we change the set the page should be set to 0 again
-                    viewModel.setPageNumber(0)
-                    viewModel.setSet(spinnerSets.selectedItem.toString())
+                    // when we change the set the page should be set to 1 again
+                    viewModel.setPageNumber(1)
+                    if (spinnerSets.selectedItem.toString() == "ALL")
+                        viewModel.setSet(null)
+                    else
+                        viewModel.setSet(spinnerSets.selectedItem.toString())
+
                     viewModel.getCardsOfSetForPageWithKeywords(
                         viewModel.pageNumber(),
                         viewModel.set(),
@@ -113,7 +125,6 @@ class OverviewFragment : Fragment(), OnClickListener {
 
             }
         }
-
 
         // spinner for Class selection
         val spinnerClasses = binding.spinnerClasses
@@ -130,15 +141,14 @@ class OverviewFragment : Fragment(), OnClickListener {
             if (adapter != null) {
                 spinnerClasses.adapter = adapter
             }
-
             spinnerClasses.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>,
                     view: View, position: Int, id: Long
                 ) {
-                    // when we change the class the page should be set to 0 again
-                    viewModel.setPageNumber(0)
+                    // when we change the class the page should be set to 1 again
+                    viewModel.setPageNumber(1)
                     // clear the list to set just one parameter at the tie for the keywords (for now)
                     viewModel._cardFilter.m_keyWords.clear()
                     viewModel._cardFilter.m_keyWords.add(spinnerClasses.selectedItem as KeyWords)
@@ -154,15 +164,12 @@ class OverviewFragment : Fragment(), OnClickListener {
                 override fun onNothingSelected(parent: AdapterView<*>) {
                     // write code to perform some action
                 }
-
             }
         }
-
         return binding.root
     }
 
     override fun onClick(v: View?) {
-
         when (v?.id) {
             R.id.btnNextPage -> {
                 viewModel.nextPage()

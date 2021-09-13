@@ -25,7 +25,7 @@
             type="com.kamilkirstein.fabdeckbuilder.network.Data" />
     </data>
     <ImageView
-        android:id="@+id/mars_image"
+        android:id="@+id/card_image"
         android:layout_width="wrap_content"
         android:layout_height="170dp"
         android:scaleType="fitXY"

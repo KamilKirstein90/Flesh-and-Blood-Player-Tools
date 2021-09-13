@@ -26,7 +26,6 @@ class NullToEmptyStringAdapter {
     fun toJson(@NullToEmptyString value: String?): String? {
         return value
     }
-
     @FromJson
     @NullToEmptyString
     fun fromJson(@Nullable data: String?): String? {
@@ -41,7 +40,6 @@ private val moshi = Moshi.Builder()
     .add(NullToEmptyStringAdapter())
     .add(KotlinJsonAdapterFactory())
     .build()
-
 /**
  * The Retrofit object with the Moshi converter.
  */
@@ -49,7 +47,6 @@ private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL)
     .build()
-
 /**
  * A public interface that exposes the [getCards] method
  */

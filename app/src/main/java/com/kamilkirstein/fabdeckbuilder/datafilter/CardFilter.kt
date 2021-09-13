@@ -14,9 +14,10 @@ public class CardFilter {
     var m_rarity: String? = null // only C, R, S, T, L, F, P // enum rarity
     var m_set : String? = null // only WTR, ARC, CRU, MON // enum set
 
-    public fun getKeyWordsStringFromKeyWords():MutableSet<String>? {
+    public fun getKeyWordsStringFromKeyWords():MutableSet<String>?
+    {
         m_keyWordsString?.clear()
-        if (m_keyWords.isEmpty())
+        if (m_keyWords.contains(KeyWords.KEYWORDS_ALL))
             return null
         // create value for key keywords like : ["mechanologist","action","item"]
         for (e in m_keyWords)
@@ -25,6 +26,4 @@ public class CardFilter {
         }
         return m_keyWordsString
     }
-
-
 }
