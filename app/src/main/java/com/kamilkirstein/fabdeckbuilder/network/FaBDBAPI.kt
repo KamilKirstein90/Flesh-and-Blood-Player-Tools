@@ -77,6 +77,11 @@ interface FabDbApiService {
     @GET("cards?per_page=25")
     suspend fun getCardsOfSet(@Query("set") set : String?) : ListOfCards
 
+    @GET("cards?per_page=25")
+    suspend fun getCardsOfSetForPageWithKeywords(@Query("page") page: Int,
+                                                 @Query("set") set: String?, @Query("keywords") keywords: MutableSet<String>?
+    ) : ListOfCards
+
 }
 
 /**

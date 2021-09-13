@@ -16,6 +16,7 @@
 
 package com.kamilkirstein.fabdeckbuilder.overview
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,11 +24,13 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kamilkirstein.fabdeckbuilder.R
 import com.kamilkirstein.fabdeckbuilder.databinding.FragmentOverviewBinding
+import com.kamilkirstein.fabdeckbuilder.datafilter.KeyWords
+
 
 /**
  * This fragment shows the the status of the Mars photos web services transaction.
@@ -36,6 +39,17 @@ class OverviewFragment : Fragment(), OnClickListener {
 
     private val viewModel: OverviewViewModel by viewModels()
 
+    // array for the class selection spinner
+    val classes = arrayListOf<KeyWords>(
+        KeyWords.KEYWORDS_GENERIC,
+        KeyWords.KEYWORDS_BRUTE,
+        KeyWords.KEYWORDS_GUARDIAN,
+        KeyWords.KEYWORDS_MECCHANOLOGIST,
+        KeyWords.KEYWORDS_NINJA,
+        KeyWords.KEYWORDS_RANGER,
+        KeyWords.KEYWORDS_RUNEBLADE,
+        KeyWords.KEYWORDS_WARRIOR
+    )
 
     /**
      * Inflates the layout with Data Binding, sets its lifecycle owner to the OverviewFragment
@@ -60,10 +74,9 @@ class OverviewFragment : Fragment(), OnClickListener {
         binding.btnNextPage.setOnClickListener(this);
         binding.btnPrevPage.setOnClickListener(this);
 
-
-        // access the spinner
-        val spinner = binding.spinnerSets;
-        if (spinner != null) {
+        // spinner for set selection
+        val spinnerSets = binding.spinnerSets
+        if (spinnerSets != null) {
 
             val adapter = activity?.let {
                 ArrayAdapter.createFromResource(
@@ -73,18 +86,71 @@ class OverviewFragment : Fragment(), OnClickListener {
             }
 
             if (adapter != null) {
-                spinner.adapter = adapter
+                spinnerSets.adapter = adapter
             }
             val sets = R.array.Sets
-            spinner.onItemSelectedListener = object :
+            spinnerSets.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>,
                     view: View, position: Int, id: Long
                 ) {
-                    viewModel.getCardsOfSet(spinner.selectedItem.toString())
+                    // when we change the set the page should be set to 0 again
+                    viewModel.setPageNumber(0)
+                    viewModel.setSet(spinnerSets.selectedItem.toString())
+                    viewModel.getCardsOfSetForPageWithKeywords(
+                        viewModel.pageNumber(),
+                        viewModel.set(),
+                        viewModel._cardFilter.getKeyWordsStringFromKeyWords()
+                    )
+                    // set the color of the first item to wihte
+                    (parent.getChildAt(0) as TextView).setTextColor(Color.WHITE)
                 }
 
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+
+            }
+        }
+
+
+        // spinner for Class selection
+        val spinnerClasses = binding.spinnerClasses
+        if (spinnerClasses != null) {
+
+            val adapter = activity?.let {
+                ArrayAdapter(
+                    it?.baseContext,
+                    android.R.layout.simple_spinner_item,
+                    classes.toArray()
+                )
+            }
+
+            if (adapter != null) {
+                spinnerClasses.adapter = adapter
+            }
+
+            spinnerClasses.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View, position: Int, id: Long
+                ) {
+                    // when we change the class the page should be set to 0 again
+                    viewModel.setPageNumber(0)
+                    // clear the list to set just one parameter at the tie for the keywords (for now)
+                    viewModel._cardFilter.m_keyWords.clear()
+                    viewModel._cardFilter.m_keyWords.add(spinnerClasses.selectedItem as KeyWords)
+                    viewModel.getCardsOfSetForPageWithKeywords(
+                        viewModel.pageNumber(),
+                        viewModel.set(),
+                        viewModel._cardFilter.getKeyWordsStringFromKeyWords()
+                    )
+                    // set the color of the first item to wihte
+                    (parent.getChildAt(0) as TextView).setTextColor(Color.WHITE)
+
+                }
                 override fun onNothingSelected(parent: AdapterView<*>) {
                     // write code to perform some action
                 }
@@ -100,11 +166,21 @@ class OverviewFragment : Fragment(), OnClickListener {
         when (v?.id) {
             R.id.btnNextPage -> {
                 viewModel.nextPage()
-                viewModel.getCardsForPage(viewModel.pageNumber())
+                // viewModel.getCardsForPage(viewModel.pageNumber())
+                viewModel.getCardsOfSetForPageWithKeywords(
+                    viewModel.pageNumber(),
+                    viewModel.set(),
+                    viewModel._cardFilter.getKeyWordsStringFromKeyWords()
+                )
             }
             R.id.btnPrevPage -> {
                 viewModel.prevPage()
-                viewModel.getCardsForPage(viewModel.pageNumber())
+                // viewModel.getCardsForPage(viewModel.pageNumber())
+                viewModel.getCardsOfSetForPageWithKeywords(
+                    viewModel.pageNumber(),
+                    viewModel.set(),
+                    viewModel._cardFilter.getKeyWordsStringFromKeyWords()
+                )
             }
             else -> {
             }

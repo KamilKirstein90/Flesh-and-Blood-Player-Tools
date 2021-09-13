@@ -1,12 +1,12 @@
 package com.kamilkirstein.fabdeckbuilder.network
 
 data class Meta(
-    val current_page: Int,
-    val from: Int,
-    val last_page: Int,
+    val current_page: Integer?,
+    val from: Integer?,
+    val last_page: Integer?,
     val links: List<Link>?,
-    val path: String,
-    val per_page: Int,
-    val to: Int,
-    val total: Int
+    val path: String?,
+    val per_page: Integer?,
+    val to: Integer?,
+    val total: Integer?
 )

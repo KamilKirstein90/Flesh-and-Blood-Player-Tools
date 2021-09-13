@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kamilkirstein.fabdeckbuilder.datafilter.CardFilter
 import com.kamilkirstein.fabdeckbuilder.network.FabDbAPI
 import com.kamilkirstein.fabdeckbuilder.network.Data
 import kotlinx.coroutines.launch
@@ -19,6 +20,8 @@ class OverviewViewModel : ViewModel() {
 
     private var _pageNumber : Int = 0
     private var _set : String? = null
+    public var _cardFilter = CardFilter()
+
 
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<FabDBAPIStatus>()
@@ -93,17 +96,43 @@ class OverviewViewModel : ViewModel() {
         }
     }
 
-    fun pageNumber():Int {return this._pageNumber
+    public fun getCardsOfSetForPageWithKeywords( page : Int, set : String?, keywords : MutableSet<String>?) {
+        viewModelScope.launch {
+            _status.value = FabDBAPIStatus.LOADING
+            try {
+                _cards.value = FabDbAPI.retrofitService.getCardsOfSetForPageWithKeywords(
+                    page,
+                    set,
+                    keywords
+                ).cardsData
+                Log.e("Inputs:", "page:" + page.toString() + set + " keywords " + keywords)
+                _status.value = FabDBAPIStatus.DONE
+            } catch (e: Exception) {
+                _status.value = FabDBAPIStatus.ERROR
+                Log.i("response", "No Response")
+                Log.e("Why no Response:", e.toString())
+                Log.e("Why no Response:", "page:" + page.toString() + set + " keywords " + keywords)
+            }
+        }
     }
 
+    fun setPageNumber (page :Int){
+        _pageNumber = page;
+    }
     public fun nextPage(){
         ++_pageNumber
     }
+    fun pageNumber():Int {return this._pageNumber }
 
     public fun prevPage(){
         if(_pageNumber == 0)
             return;
         --_pageNumber;
+    }
+
+    public fun setSet(set:String?){
+        _set = set
 
     }
+    fun set() : String? { return _set }
 }
