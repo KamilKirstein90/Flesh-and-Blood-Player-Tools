@@ -1,4 +1,4 @@
-package com.kamilkirstein.fabdeckbuilder.network
+package com.kamilkirstein.fabdeckbuilder.network.data
 
 data class Sku(
     val finish: String,

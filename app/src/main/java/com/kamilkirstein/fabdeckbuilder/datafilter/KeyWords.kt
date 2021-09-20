@@ -1,10 +1,12 @@
 package com.kamilkirstein.fabdeckbuilder.datafilter
 
 enum class KeyWords(val keyWord : String) {
+
     KEYWORDS_ALL("all"),
     KEYWORDS_GENERIC("generic"),
     KEYWORDS_BRUTE("brute"),
     KEYWORDS_GUARDIAN("guardian"),
+    KEYWORDS_ILLUSIONIST("illusionist"),
     KEYWORDS_MECCHANOLOGIST("mechanologist"),
     KEYWORDS_NINJA("ninja"),
     KEYWORDS_RANGER("ranger"),

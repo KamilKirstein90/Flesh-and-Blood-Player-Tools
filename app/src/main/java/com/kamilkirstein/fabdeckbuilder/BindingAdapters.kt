@@ -23,8 +23,7 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.kamilkirstein.fabdeckbuilder.network.Card
-import com.kamilkirstein.fabdeckbuilder.network.Data
+import com.kamilkirstein.fabdeckbuilder.network.data.Data
 import com.kamilkirstein.fabdeckbuilder.overview.FabDBAPIStatus
 import com.kamilkirstein.fabdeckbuilder.overview.PhotoGridAdapter
 

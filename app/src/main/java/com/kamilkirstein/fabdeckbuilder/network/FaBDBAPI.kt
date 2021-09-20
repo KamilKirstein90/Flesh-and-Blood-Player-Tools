@@ -1,6 +1,8 @@
 package com.kamilkirstein.fabdeckbuilder.network
 
 import androidx.annotation.Nullable
+import com.kamilkirstein.fabdeckbuilder.datafilter.CardFilter
+import com.kamilkirstein.fabdeckbuilder.network.data.ListOfCards
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonQualifier
 import com.squareup.moshi.Moshi
@@ -26,6 +28,7 @@ class NullToEmptyStringAdapter {
     fun toJson(@NullToEmptyString value: String?): String? {
         return value
     }
+
     @FromJson
     @NullToEmptyString
     fun fromJson(@Nullable data: String?): String? {
@@ -40,6 +43,7 @@ private val moshi = Moshi.Builder()
     .add(NullToEmptyStringAdapter())
     .add(KotlinJsonAdapterFactory())
     .build()
+
 /**
  * The Retrofit object with the Moshi converter.
  */
@@ -47,6 +51,7 @@ private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL)
     .build()
+
 /**
  * A public interface that exposes the [getCards] method
  */
@@ -56,28 +61,16 @@ interface FabDbApiService {
      * The @GET annotation indicates that the "photos" endpoint will be requested with the GET
      * HTTP method
      */
-    @GET("cards?per_page=100")
-    suspend fun getCards(): ListOfCards
-
-    /* example for get with @Query to pass parameters to
-   @GET("/maps/api/g
-   eocode/json?")
-    Call<JsonObject> getLocationInfo(@Query("address") String zipCode,
-                                             @Query("sensor") boolean sensor,
-                                             @Query("client") String client,
-                                             @Query("signature") String signature);
-     */
-
     @GET("cards?per_page=25")
-    suspend fun getCardsForPage(@Query("page") page : Int) : ListOfCards
-
-    @GET("cards?per_page=25")
-    suspend fun getCardsOfSet(@Query("set") set : String?) : ListOfCards
-
-    @GET("cards?per_page=25")
-    suspend fun getCardsOfSetForPageWithKeywords(@Query("page") page: Int,
-                                                 @Query("set") set: String?, @Query("keywords") keywords: MutableSet<String>?
-    ) : ListOfCards
+    suspend fun getCards(
+        @Query("page") page: Int,
+        @Query("name") name: String?,
+        @Query("set") set: String?,
+        @Query("keywords") keywords: MutableSet<String>?,
+        @Query("pitch") pitch: String?,
+        @Query("cost") cost: String?,
+        @Query("rarity") rarity: String?
+    ): ListOfCards
 
 }
 

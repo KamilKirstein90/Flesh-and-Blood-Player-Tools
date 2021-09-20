@@ -1,29 +1,52 @@
 package com.kamilkirstein.fabdeckbuilder.datafilter
 
 import android.util.Log
+import com.kamilkirstein.fabdeckbuilder.Rarity
 
-public class CardFilter {
+public  class CardFilter()
+{
 
-    private
-    var pageNumber : Integer? = null
-    var m_name : String? = null
-    var m_keyWords : MutableSet<KeyWords> = mutableSetOf() // set because no duplicate elements are allowed
-    var m_keyWordsString : MutableSet<String>? = mutableSetOf()// only constants allowed from above
-    var m_pitch : String? = null // only 1, 2, 3 allowed // enum pitch
-    var m_cost : String? = null // only 0, 1, 2, 3, 4+ // enum cost
-    var m_rarity: String? = null // only C, R, S, T, L, F, P // enum rarity
-    var m_set : String? = null // only WTR, ARC, CRU, MON // enum set
+    var _pageNumber : Int = 1// we always start at page 1
+    var _name : String? = null
+    var _set : String? = null
+    var _keyWords : MutableSet<KeyWords> = mutableSetOf() // set because no duplicate elements are allowed
+    var _keyWordsString : MutableSet<String>? = mutableSetOf()// only constants allowed from above
+    var _pitch : String? = null // only 1, 2, 3 allowed // enum pitch
+    var _cost : String? = null // only 0, 1, 2, 3, 4+ // enum cost
+    var _rarity: String? = null // only C, R, S, T, L, F, P // enum rarity
 
-    public fun getKeyWordsStringFromKeyWords():MutableSet<String>?
+
+    // the next two values are values that are only used in the
+    // keyWordString with the KEY_WORDS_ATTACK, KEY_WORDS_DEFFENSE  =<> to get cards with the given
+    // attack and defense value
+    var _defenseValue : Integer? = null
+    var _attackValue : Integer? =  null
+
+    // change the page
+    public fun nextPage(){
+        ++_pageNumber
+    }
+    public fun prevPage(){
+        if(_pageNumber == 1)
+            return;
+        --_pageNumber;
+    }
+
+
+    public fun createKeyWordString()
     {
-        m_keyWordsString?.clear()
-        if (m_keyWords.contains(KeyWords.KEYWORDS_ALL))
-            return null
+        _keyWordsString?.clear()
+
+        if (_keyWords.contains(KeyWords.KEYWORDS_ALL))
+            return;
+
+
         // create value for key keywords like : ["mechanologist","action","item"]
-        for (e in m_keyWords)
+        for (e in _keyWords)
         {
-            m_keyWordsString?.add(e.toString())
+            _keyWordsString?.add(e.toString())
         }
-        return m_keyWordsString
+        Log.i("KeyWordString", _keyWordsString.toString())
+        return;
     }
 }

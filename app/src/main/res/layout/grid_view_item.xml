@@ -22,7 +22,7 @@
     <data>
         <variable
             name="card"
-            type="com.kamilkirstein.fabdeckbuilder.network.Data" />
+            type="com.kamilkirstein.fabdeckbuilder.network.data.Data" />
     </data>
     <ImageView
         android:id="@+id/card_image"

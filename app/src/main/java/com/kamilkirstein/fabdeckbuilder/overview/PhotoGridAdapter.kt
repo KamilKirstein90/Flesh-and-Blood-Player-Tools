@@ -22,9 +22,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kamilkirstein.fabdeckbuilder.databinding.GridViewItemBinding
-import com.kamilkirstein.fabdeckbuilder.network.Card
-import com.kamilkirstein.fabdeckbuilder.network.Data
-import com.kamilkirstein.fabdeckbuilder.network.ListOfCards
+import com.kamilkirstein.fabdeckbuilder.network.data.Card
+import com.kamilkirstein.fabdeckbuilder.network.data.Data
 
 
 /**

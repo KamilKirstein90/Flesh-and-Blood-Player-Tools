@@ -30,6 +30,7 @@ import androidx.fragment.app.viewModels
 import com.kamilkirstein.fabdeckbuilder.R
 import com.kamilkirstein.fabdeckbuilder.databinding.FragmentOverviewBinding
 import com.kamilkirstein.fabdeckbuilder.datafilter.KeyWords
+import com.kamilkirstein.fabdeckbuilder.datafilter.Set
 
 
 /**
@@ -38,12 +39,22 @@ import com.kamilkirstein.fabdeckbuilder.datafilter.KeyWords
 class OverviewFragment : Fragment(), OnClickListener {
 
     private val viewModel: OverviewViewModel by viewModels()
-    // array for the class selection spinner
+
+    // arreys of different classes for the spinners
+    val sets = arrayListOf<Set>(
+        Set.SET_ALL,
+        Set.SET_WELCOME_TO_RATHE,
+        Set.SET_ARCANE_RISING,
+        Set.SET_MONARCH,
+        Set.SET_CRUSIBLE_OF_WAR,
+        Set.SET_TALES_OF_ARIA
+    )
     val classes = arrayListOf<KeyWords>(
         KeyWords.KEYWORDS_ALL,
         KeyWords.KEYWORDS_GENERIC,
         KeyWords.KEYWORDS_BRUTE,
         KeyWords.KEYWORDS_GUARDIAN,
+        KeyWords.KEYWORDS_ILLUSIONIST,
         KeyWords.KEYWORDS_MECCHANOLOGIST,
         KeyWords.KEYWORDS_NINJA,
         KeyWords.KEYWORDS_RANGER,
@@ -58,6 +69,10 @@ class OverviewFragment : Fragment(), OnClickListener {
         KeyWords.KEYWORDS_EARTH,
         KeyWords.KEYWORDS_ICE,
         KeyWords.KEYWORDS_LIGHTNING
+    )
+    val cardType = arrayListOf<KeyWords>(
+        //TODO CardTypes:
+
     )
     /**
      * Inflates the layout with Data Binding, sets its lifecycle owner to the OverviewFragment
@@ -87,12 +102,12 @@ class OverviewFragment : Fragment(), OnClickListener {
         if (spinnerSets != null) {
 
             val adapter = activity?.let {
-                ArrayAdapter.createFromResource(
-                    it?.baseContext, R.array.Sets,
-                    android.R.layout.simple_spinner_item
+                ArrayAdapter(
+                    it?.baseContext,
+                    android.R.layout.simple_spinner_item,
+                    sets.toArray()
                 )
             }
-
             if (adapter != null) {
                 spinnerSets.adapter = adapter
             }
@@ -104,21 +119,16 @@ class OverviewFragment : Fragment(), OnClickListener {
                     view: View, position: Int, id: Long
                 ) {
                     // when we change the set the page should be set to 1 again
-                    viewModel.setPageNumber(1)
-                    if (spinnerSets.selectedItem.toString() == "ALL")
-                        viewModel.setSet(null)
+                    viewModel._cardFilter._pageNumber = 1
+                    if (spinnerSets.selectedItem.toString() == Set.SET_ALL.toString())
+                        viewModel._cardFilter._set = null
                     else
-                        viewModel.setSet(spinnerSets.selectedItem.toString())
+                        viewModel._cardFilter._set = spinnerSets.selectedItem.toString()
 
-                    viewModel.getCardsOfSetForPageWithKeywords(
-                        viewModel.pageNumber(),
-                        viewModel.set(),
-                        viewModel._cardFilter.getKeyWordsStringFromKeyWords()
-                    )
-                    // set the color of the first item to wihte
+                    viewModel.getCards()
+                    // TODO: Remove this and set the color in the theme just for now
                     (parent.getChildAt(0) as TextView).setTextColor(Color.WHITE)
                 }
-
                 override fun onNothingSelected(parent: AdapterView<*>) {
                     // write code to perform some action
                 }
@@ -148,16 +158,16 @@ class OverviewFragment : Fragment(), OnClickListener {
                     view: View, position: Int, id: Long
                 ) {
                     // when we change the class the page should be set to 1 again
-                    viewModel.setPageNumber(1)
+                    viewModel._cardFilter._pageNumber = 1
                     // clear the list to set just one parameter at the tie for the keywords (for now)
-                    viewModel._cardFilter.m_keyWords.clear()
-                    viewModel._cardFilter.m_keyWords.add(spinnerClasses.selectedItem as KeyWords)
-                    viewModel.getCardsOfSetForPageWithKeywords(
-                        viewModel.pageNumber(),
-                        viewModel.set(),
-                        viewModel._cardFilter.getKeyWordsStringFromKeyWords()
-                    )
-                    // set the color of the first item to wihte
+                    viewModel._cardFilter._keyWords.clear()
+                    viewModel._cardFilter._keyWords.add(spinnerClasses.selectedItem as KeyWords)
+
+                    // create a new KeyWordString
+                    viewModel._cardFilter.createKeyWordString()
+                    viewModel.getCards()
+
+                    // TODO: move the color to the theme
                     (parent.getChildAt(0) as TextView).setTextColor(Color.WHITE)
 
                 }
@@ -169,25 +179,18 @@ class OverviewFragment : Fragment(), OnClickListener {
         return binding.root
     }
 
+    // buttons next page etc.
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnNextPage -> {
-                viewModel.nextPage()
+                viewModel._cardFilter.nextPage()
                 // viewModel.getCardsForPage(viewModel.pageNumber())
-                viewModel.getCardsOfSetForPageWithKeywords(
-                    viewModel.pageNumber(),
-                    viewModel.set(),
-                    viewModel._cardFilter.getKeyWordsStringFromKeyWords()
-                )
+                viewModel.getCards()
             }
             R.id.btnPrevPage -> {
-                viewModel.prevPage()
+                viewModel._cardFilter.prevPage()
                 // viewModel.getCardsForPage(viewModel.pageNumber())
-                viewModel.getCardsOfSetForPageWithKeywords(
-                    viewModel.pageNumber(),
-                    viewModel.set(),
-                    viewModel._cardFilter.getKeyWordsStringFromKeyWords()
-                )
+                viewModel.getCards()
             }
             else -> {
             }
