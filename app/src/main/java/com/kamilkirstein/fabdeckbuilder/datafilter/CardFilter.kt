@@ -2,18 +2,20 @@ package com.kamilkirstein.fabdeckbuilder.datafilter
 
 import android.util.Log
 import com.kamilkirstein.fabdeckbuilder.Rarity
+import com.kamilkirstein.fabdeckbuilder.datafilter.enums.Cost
+import com.kamilkirstein.fabdeckbuilder.datafilter.enums.KeyWords
+import com.kamilkirstein.fabdeckbuilder.datafilter.enums.Pitch
 
 public  class CardFilter()
 {
-
     var _pageNumber : Int = 1// we always start at page 1
     var _name : String? = null
     var _set : String? = null
     var _keyWords : MutableSet<KeyWords> = mutableSetOf() // set because no duplicate elements are allowed
     var _keyWordsString : MutableSet<String>? = mutableSetOf()// only constants allowed from above
-    var _pitch : String? = null // only 1, 2, 3 allowed // enum pitch
-    var _cost : String? = null // only 0, 1, 2, 3, 4+ // enum cost
-    var _rarity: String? = null // only C, R, S, T, L, F, P // enum rarity
+    var _pitch : Pitch? = null // only 1, 2, 3 allowed // enum pitch
+    var _cost : Cost? = null // only 0, 1, 2, 3, 4+ // enum cost
+    var _rarity: Rarity? = null // only C, R, S, T, L, F, P // enum rarity
 
 
     // the next two values are values that are only used in the

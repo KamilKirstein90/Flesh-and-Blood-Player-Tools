@@ -1,7 +1,6 @@
 package com.kamilkirstein.fabdeckbuilder.network
 
 import androidx.annotation.Nullable
-import com.kamilkirstein.fabdeckbuilder.datafilter.CardFilter
 import com.kamilkirstein.fabdeckbuilder.network.data.ListOfCards
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonQualifier
@@ -12,7 +11,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 
 private const val BASE_URL = "https://api.fabdb.net/"
 
@@ -47,9 +47,19 @@ private val moshi = Moshi.Builder()
 /**
  * The Retrofit object with the Moshi converter.
  */
+
+// add okHttpClient create it with a builder
+// only enable
+private val logging : HttpLoggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
+
+private val oKHttpClientBuilder : OkHttpClient.Builder  =  OkHttpClient.Builder().addInterceptor(
+    logging);
+
+
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL)
+    .client(oKHttpClientBuilder.build())
     .build()
 
 /**

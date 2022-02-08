@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kamilkirstein.fabdeckbuilder.databinding.GridViewItemBinding
-import com.kamilkirstein.fabdeckbuilder.network.data.Card
 import com.kamilkirstein.fabdeckbuilder.network.data.Data
 
 
@@ -35,7 +34,7 @@ class PhotoGridAdapter :
 
     /**
      * The MarsPhotosViewHolder constructor takes the binding variable from the associated
-     * GridViewItem, which nicely gives it access to the full [Card] information.
+     * GridViewItem, which nicely gives it access to the full [Data] information.
      */
     class CardImagesViewHolder(
         private var binding: GridViewItemBinding

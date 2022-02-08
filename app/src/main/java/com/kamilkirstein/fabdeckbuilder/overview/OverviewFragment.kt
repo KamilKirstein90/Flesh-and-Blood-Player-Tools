@@ -29,8 +29,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kamilkirstein.fabdeckbuilder.R
 import com.kamilkirstein.fabdeckbuilder.databinding.FragmentOverviewBinding
-import com.kamilkirstein.fabdeckbuilder.datafilter.KeyWords
-import com.kamilkirstein.fabdeckbuilder.datafilter.Set
+import com.kamilkirstein.fabdeckbuilder.datafilter.enums.KeyWords
+import com.kamilkirstein.fabdeckbuilder.datafilter.enums.Set
 
 
 /**
@@ -47,7 +47,8 @@ class OverviewFragment : Fragment(), OnClickListener {
         Set.SET_ARCANE_RISING,
         Set.SET_MONARCH,
         Set.SET_CRUSIBLE_OF_WAR,
-        Set.SET_TALES_OF_ARIA
+        Set.SET_TALES_OF_ARIA,
+        Set.SET_EVERFEST
     )
     val classes = arrayListOf<KeyWords>(
         KeyWords.KEYWORDS_ALL,

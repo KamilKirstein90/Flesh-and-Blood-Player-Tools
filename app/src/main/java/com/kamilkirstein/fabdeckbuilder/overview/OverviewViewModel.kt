@@ -54,18 +54,20 @@ class OverviewViewModel : ViewModel() {
                                                                 _cardFilter._name,
                                                                 _cardFilter._set,
                                                                 _cardFilter._keyWordsString,
-                                                                _cardFilter._pitch,
-                                                                _cardFilter._cost,
-                                                                _cardFilter._rarity).cardsData
+                                                                _cardFilter._pitch.toString(),
+                                                                _cardFilter._cost.toString(),
+                                                                _cardFilter._rarity.toString()).cardsData
 
                 if (_cards.value.isNullOrEmpty()) {
                     _status.value = FabDBAPIStatus.NOTHING_FOUND
+                    Log.e("LogResponse", "Nothing Found");
                 }
                 else {
                     _status.value = FabDBAPIStatus.DONE
                 }
 
             } catch (e: Exception) {
+                Log.e("LogResponse ", e.toString());
                 _status.value = FabDBAPIStatus.ERROR
                 _cards.value = listOf()
             }

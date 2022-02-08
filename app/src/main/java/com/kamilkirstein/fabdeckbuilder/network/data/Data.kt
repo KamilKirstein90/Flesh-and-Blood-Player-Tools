@@ -1,7 +1,7 @@
 package com.kamilkirstein.fabdeckbuilder.network.data
 
 data class Data(
-    val banned: Boolean = false,
+    val banned: List<String>?,
     val identifier: String?,
     val image: String?,
     val keywords: List<String>?,
