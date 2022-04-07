@@ -38,14 +38,14 @@ class OverviewViewModel : ViewModel() {
      * Call getMarsPhotos() on init so we can display status immediately.
      */
     init {
-        getCards()
+        cards()
     }
 
     /**
      * Gets Mars photos information from the Mars API Retrofit service and updates the
      * [MarsPhoto] [List] [LiveData].
      */
-    public fun getCards() {
+    public fun cards() {
         viewModelScope.launch {
             _status.value = FabDBAPIStatus.LOADING
             try {
@@ -54,9 +54,9 @@ class OverviewViewModel : ViewModel() {
                                                                 _cardFilter._name,
                                                                 _cardFilter._set,
                                                                 _cardFilter._keyWordsString,
-                                                                _cardFilter._pitch.toString(),
-                                                                _cardFilter._cost.toString(),
-                                                                _cardFilter._rarity.toString()).cardsData
+                                                                _cardFilter._pitch?.toString(),
+                                                                _cardFilter._cost?.toString(),
+                                                                _cardFilter._rarity?.toString()).cardsData
 
                 if (_cards.value.isNullOrEmpty()) {
                     _status.value = FabDBAPIStatus.NOTHING_FOUND

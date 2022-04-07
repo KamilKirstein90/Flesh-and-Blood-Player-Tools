@@ -3,9 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Develop/KotlinApps/FaBDeckbuildingApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Develop/KotlinApps/FaBDeckbuildingApp/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.43538461538461537" />
+        <entry key="..\:/Develop/KotlinApps/FaBDeckbuildingApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Develop/KotlinApps/FaBDeckbuildingApp/app/src/main/res/layout/card_filter_item.xml" value="0.42604166666666665" />
         <entry key="..\:/Develop/KotlinApps/FaBDeckbuildingApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.2056159420289855" />
+        <entry key="..\:/Develop/KotlinApps/FaBDeckbuildingApp/app/src/main/res/layout/fragment_home.xml" value="0.296875" />
+        <entry key="..\:/Develop/KotlinApps/FaBDeckbuildingApp/app/src/main/res/layout/fragment_notifications.xml" value="0.42604166666666665" />
         <entry key="..\:/Develop/KotlinApps/FaBDeckbuildingApp/app/src/main/res/layout/fragment_overview.xml" value="0.2056159420289855" />
+        <entry key="..\:/Develop/KotlinApps/FaBDeckbuildingApp/app/src/main/res/layout/grid_view_item.xml" value="0.42604166666666665" />
+        <entry key="..\:/Develop/KotlinApps/FaBDeckbuildingApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.42604166666666665" />
+        <entry key="..\:/Develop/KotlinApps/FaBDeckbuildingApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.296875" />
+        <entry key="..\:/Develop/KotlinApps/FaBDeckbuildingApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.31302083333333336" />
       </map>
     </option>
   </component>

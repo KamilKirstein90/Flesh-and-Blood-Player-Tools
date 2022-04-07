@@ -40,7 +40,7 @@ class OverviewFragment : Fragment(), OnClickListener {
 
     private val viewModel: OverviewViewModel by viewModels()
 
-    // arreys of different classes for the spinners
+    // array of different classes for the spinners
     val sets = arrayListOf<Set>(
         Set.SET_ALL,
         Set.SET_WELCOME_TO_RATHE,
@@ -126,7 +126,7 @@ class OverviewFragment : Fragment(), OnClickListener {
                     else
                         viewModel._cardFilter._set = spinnerSets.selectedItem.toString()
 
-                    viewModel.getCards()
+                    viewModel.cards()
                     // TODO: Remove this and set the color in the theme just for now
                     (parent.getChildAt(0) as TextView).setTextColor(Color.WHITE)
                 }
@@ -166,7 +166,7 @@ class OverviewFragment : Fragment(), OnClickListener {
 
                     // create a new KeyWordString
                     viewModel._cardFilter.createKeyWordString()
-                    viewModel.getCards()
+                    viewModel.cards()
 
                     // TODO: move the color to the theme
                     (parent.getChildAt(0) as TextView).setTextColor(Color.WHITE)
@@ -186,12 +186,12 @@ class OverviewFragment : Fragment(), OnClickListener {
             R.id.btnNextPage -> {
                 viewModel._cardFilter.nextPage()
                 // viewModel.getCardsForPage(viewModel.pageNumber())
-                viewModel.getCards()
+                viewModel.cards()
             }
             R.id.btnPrevPage -> {
                 viewModel._cardFilter.prevPage()
                 // viewModel.getCardsForPage(viewModel.pageNumber())
-                viewModel.getCards()
+                viewModel.cards()
             }
             else -> {
             }

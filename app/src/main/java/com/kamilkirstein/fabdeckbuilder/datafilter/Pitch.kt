@@ -1,7 +1,7 @@
 package com.kamilkirstein.fabdeckbuilder.datafilter
 
 enum class Pitch (val pitch : String) {
-
+    PITCH_EMPTY(""),
     PITCH_1("1"),
     PITCH_2("2"),
     PITCH_3("3");
