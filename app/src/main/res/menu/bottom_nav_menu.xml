@@ -3,13 +3,12 @@
 
     <item
         android:id="@+id/overviewFragment"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_card_overview" />
 
     <item
-        android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/cards" />
-
+        android:id="@+id/GameFragment"
+        android:icon="@drawable/ic_start_game"
+        android:title="@string/title_start_game" />
 
 </menu>

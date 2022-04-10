@@ -24,8 +24,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.kamilkirstein.fabdeckbuilder.network.data.Data
-import com.kamilkirstein.fabdeckbuilder.overview.FabDBAPIStatus
-import com.kamilkirstein.fabdeckbuilder.overview.PhotoGridAdapter
+import com.kamilkirstein.fabdeckbuilder.ui.overview.FabDBAPIStatus
+import com.kamilkirstein.fabdeckbuilder.ui.overview.PhotoGridAdapter
 
 /**
  * Updates the data shown in the [RecyclerView].

@@ -1,4 +1,4 @@
-package com.kamilkirstein.fabdeckbuilder.overview
+package com.kamilkirstein.fabdeckbuilder.ui.overview
 
 
 import android.util.Log

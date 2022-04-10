@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kamilkirstein.fabdeckbuilder.overview
+package com.kamilkirstein.fabdeckbuilder.ui.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
