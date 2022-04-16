@@ -36,6 +36,9 @@ class GameFragment : Fragment() , View.OnClickListener{
         binding.btnAddPlayer.setOnClickListener(this)
         binding.btnSubPlayer.setOnClickListener(this)
 
+        val startGameDialogFragment  = StartGameDialogFragment()
+        startGameDialogFragment.show(childFragmentManager, "Start Dialog")
+
     }
 
     override fun onClick(v: View?) {

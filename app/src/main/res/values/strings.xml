@@ -3,10 +3,14 @@
     <string name="title_card_overview">Card Overview</string>
     <string name="title_start_game">Start Game</string>
     <string name="title_notifications">Notifications</string>
-
     <string name="cards">Cards</string>
+    <string name="btn_label_start">Start</string>
+    <string name ="btn_label_cancel">Cancel</string>
+    <string name ="title_game_mode">Game Mode: </string>
+    <string name = "title_opponent_hero">Opponents Hero:</string>
+    <string name = "title_player_hero">Players Hero:</string>
 
-    <string-array name="Sets">
+    <string-array name="sets">
         <item>ALL</item>
         <item>WTR</item>
         <item>ARC</item>
@@ -15,5 +19,17 @@
         <item>ELE</item>
     </string-array>
 
+    <string-array name="game_formats">
+        <item>Classic</item>
+        <item>Blitz</item>
+        <item>Commoner</item>
+    </string-array>
+
+    <string-array name="heroes">
+        <item>Viserai</item>
+        <item>Oldhim</item>
+        <item>Rhinar</item>
+        <item>Kassai</item>
+    </string-array>
 
 </resources>

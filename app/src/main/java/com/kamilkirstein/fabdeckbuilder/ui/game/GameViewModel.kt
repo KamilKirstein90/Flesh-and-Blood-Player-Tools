@@ -16,6 +16,8 @@ class GameViewModel : ViewModel() {
     val gameMode : LiveData<String>
         get() = _gameMode
 
+
+
     private val _lifePointsOpponent = MutableLiveData<Int>(40)
     val lifePointsOpponent : LiveData<Int>
         get() = _lifePointsOpponent
@@ -50,6 +52,11 @@ class GameViewModel : ViewModel() {
     fun subLifePointsPlayer()
     {
         _lifePointsPlayer.value = _lifePointsPlayer.value?.minus(1)
+    }
+
+    fun setGameMode(gameMode :String)
+    {
+        _gameMode.value = gameMode
     }
 
     @BindingAdapter("customSetSrc:")

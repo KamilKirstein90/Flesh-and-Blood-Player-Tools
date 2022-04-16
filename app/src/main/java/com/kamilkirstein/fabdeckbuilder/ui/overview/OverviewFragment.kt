@@ -94,7 +94,7 @@ class OverviewFragment : Fragment(), OnClickListener {
         // Sets the adapter of the photosGrid RecyclerView
         binding.photosGrid.adapter = PhotoGridAdapter()
 
-        // set the  onClicklistener to the buttons
+        // set the  onClickListener to the buttons
         binding.btnNextPage.setOnClickListener(this);
         binding.btnPrevPage.setOnClickListener(this);
 
@@ -112,7 +112,7 @@ class OverviewFragment : Fragment(), OnClickListener {
             if (adapter != null) {
                 spinnerSets.adapter = adapter
             }
-            val sets = R.array.Sets
+            val sets = R.array.sets
             spinnerSets.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
