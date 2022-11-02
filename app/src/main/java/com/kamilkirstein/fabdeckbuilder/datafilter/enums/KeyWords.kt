@@ -4,6 +4,7 @@ enum class KeyWords(val keyWord : String) {
 
     KEYWORDS_ALL("all"),
     KEYWORDS_GENERIC("generic"),
+    KEYWORD_ASSASIN("assasin"),
     KEYWORDS_BRUTE("brute"),
     KEYWORDS_GUARDIAN("guardian"),
     KEYWORDS_ILLUSIONIST("illusionist"),
@@ -29,7 +30,7 @@ enum class KeyWords(val keyWord : String) {
     KEYWORDS_WEAPON("weapon"),
     KEYWORDS_AURA("aura");
 
-    // now views like spinner will geht the value of the keyword when i pass a enum list to them
+    // now views like spinner will get the value of the keyword when I pass a enum list to them
     override fun toString(): String {
         return keyWord
     }}

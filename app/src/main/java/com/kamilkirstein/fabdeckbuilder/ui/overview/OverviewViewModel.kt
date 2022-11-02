@@ -27,7 +27,7 @@ class OverviewViewModel : ViewModel() {
     // The external immutable LiveData for the request status
     val status: LiveData<FabDBAPIStatus> = _status
 
-    // Internally, we use a MutableLiveData, because we will be updating the List of MarsPhoto
+    // Internally, we use a MutableLiveData, because we will be updating the List of cards
     // with new values
     private val _cards = MutableLiveData<List<Data>>()
 

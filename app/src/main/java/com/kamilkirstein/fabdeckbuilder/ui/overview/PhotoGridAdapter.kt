@@ -33,7 +33,7 @@ class PhotoGridAdapter :
     ListAdapter<Data, PhotoGridAdapter.CardImagesViewHolder>(DiffCallback) {
 
     /**
-     * The MarsPhotosViewHolder constructor takes the binding variable from the associated
+     * The CardImagesViewHolder constructor takes the binding variable from the associated
      * GridViewItem, which nicely gives it access to the full [Data] information.
      */
     class CardImagesViewHolder(
@@ -49,7 +49,7 @@ class PhotoGridAdapter :
 
     /**
      * Allows the RecyclerView to determine which items have changed when the [List] of
-     * [MarsPhoto] has been updated.
+     * [Cards] has been updated.
      */
     companion object DiffCallback : DiffUtil.ItemCallback<Data>() {
         override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {

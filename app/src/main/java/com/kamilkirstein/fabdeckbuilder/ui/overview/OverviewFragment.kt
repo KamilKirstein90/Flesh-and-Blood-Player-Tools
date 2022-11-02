@@ -53,6 +53,7 @@ class OverviewFragment : Fragment(), OnClickListener {
     val classes = arrayListOf<KeyWords>(
         KeyWords.KEYWORDS_ALL,
         KeyWords.KEYWORDS_GENERIC,
+        KeyWords.KEYWORD_ASSASIN,
         KeyWords.KEYWORDS_BRUTE,
         KeyWords.KEYWORDS_GUARDIAN,
         KeyWords.KEYWORDS_ILLUSIONIST,
