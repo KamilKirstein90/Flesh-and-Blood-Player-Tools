@@ -41,16 +41,18 @@ class OverviewFragment : Fragment(), OnClickListener {
     private val viewModel: OverviewViewModel by viewModels()
 
     // array of different classes for the spinners
-    val sets = arrayListOf<Set>(
+    val sets = arrayListOf(
         Set.SET_ALL,
         Set.SET_WELCOME_TO_RATHE,
         Set.SET_ARCANE_RISING,
         Set.SET_MONARCH,
         Set.SET_CRUSIBLE_OF_WAR,
         Set.SET_TALES_OF_ARIA,
-        Set.SET_EVERFEST
+        Set.SET_EVERFEST,
+        Set.SET_UPRISING,
+        Set.SET_DYNASTY
     )
-    val classes = arrayListOf<KeyWords>(
+    val classes = arrayListOf(
         KeyWords.KEYWORDS_ALL,
         KeyWords.KEYWORDS_GENERIC,
         KeyWords.KEYWORD_ASSASIN,
@@ -72,6 +74,7 @@ class OverviewFragment : Fragment(), OnClickListener {
         KeyWords.KEYWORDS_ICE,
         KeyWords.KEYWORDS_LIGHTNING
     )
+
     val cardType = arrayListOf<KeyWords>(
         //TODO CardTypes:
 
