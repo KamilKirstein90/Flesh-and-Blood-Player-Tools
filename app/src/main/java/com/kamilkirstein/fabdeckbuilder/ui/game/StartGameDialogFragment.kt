@@ -36,7 +36,6 @@ class StartGameDialogFragment : DialogFragment(), AdapterView.OnItemSelectedList
             binding.spinnerPlayerHero.adapter = playerHeroAdapter
 
 
-
             builder
                 .setView(binding.root) // pass here the custom view with binding.root
                 .setMessage(R.string.title_start_game)

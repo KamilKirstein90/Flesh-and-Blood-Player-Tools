@@ -17,7 +17,6 @@ class GameViewModel : ViewModel() {
         get() = _gameMode
 
 
-
     private val _lifePointsOpponent = MutableLiveData<Int>(40)
     val lifePointsOpponent : LiveData<Int>
         get() = _lifePointsOpponent

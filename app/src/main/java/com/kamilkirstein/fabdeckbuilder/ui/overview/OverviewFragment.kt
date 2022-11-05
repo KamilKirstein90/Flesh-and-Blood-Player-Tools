@@ -107,11 +107,13 @@ class OverviewFragment : Fragment(), OnClickListener {
         if (spinnerSets != null) {
 
             val adapter = activity?.let {
-                ArrayAdapter(
-                    it?.baseContext,
-                    android.R.layout.simple_spinner_item,
-                    sets.toArray()
-                )
+                it?.baseContext?.let { it1 ->
+                    ArrayAdapter(
+                        it1,
+                        android.R.layout.simple_spinner_item,
+                        sets.toArray()
+                    )
+                }
             }
             if (adapter != null) {
                 spinnerSets.adapter = adapter
@@ -146,11 +148,13 @@ class OverviewFragment : Fragment(), OnClickListener {
         if (spinnerClasses != null) {
 
             val adapter = activity?.let {
-                ArrayAdapter(
-                    it?.baseContext,
-                    android.R.layout.simple_spinner_item,
-                    classes.toArray()
-                )
+                it?.baseContext?.let { it1 ->
+                    ArrayAdapter(
+                        it1,
+                        android.R.layout.simple_spinner_item,
+                        classes.toArray()
+                    )
+                }
             }
 
             if (adapter != null) {

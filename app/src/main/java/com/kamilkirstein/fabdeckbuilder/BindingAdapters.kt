@@ -74,5 +74,6 @@ fun bindStatus(statusImageView: ImageView, status: FabDBAPIStatus?) {
         FabDBAPIStatus.NOTHING_FOUND -> {
             // here create Textview and set toe visibility to true
         }
+        else -> {}
     }
 }
