@@ -14,16 +14,15 @@ import com.kamilkirstein.fabdeckbuilder.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() , View.OnClickListener{
 
-
     private lateinit var binding : FragmentGameBinding
     private  val gameViewModel: GameViewModel by viewModels()
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_game, container, false)
-
         return binding.root
     }
 
@@ -38,7 +37,6 @@ class GameFragment : Fragment() , View.OnClickListener{
 
         val startGameDialogFragment  = StartGameDialogFragment()
         startGameDialogFragment.show(childFragmentManager, "Start Dialog")
-
     }
 
     override fun onClick(v: View?) {
@@ -51,6 +49,4 @@ class GameFragment : Fragment() , View.OnClickListener{
             binding.btnSubPlayer.id -> gameViewModel.subLifePointsPlayer()
         }
     }
-
-
 }

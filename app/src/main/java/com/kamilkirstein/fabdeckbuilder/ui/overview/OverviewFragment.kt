@@ -32,7 +32,6 @@ import com.kamilkirstein.fabdeckbuilder.databinding.FragmentOverviewBinding
 import com.kamilkirstein.fabdeckbuilder.datafilter.enums.KeyWords
 import com.kamilkirstein.fabdeckbuilder.datafilter.enums.Set
 
-
 /**
  * This fragment shows the the status of the Mars photos web services transaction.
  */
@@ -74,7 +73,6 @@ class OverviewFragment : Fragment(), OnClickListener {
         KeyWords.KEYWORDS_ICE,
         KeyWords.KEYWORDS_LIGHTNING
     )
-
     val cardType = arrayListOf<KeyWords>(
         //TODO CardTypes:
 
@@ -101,6 +99,7 @@ class OverviewFragment : Fragment(), OnClickListener {
         // set the  onClickListener to the buttons
         binding.btnNextPage.setOnClickListener(this);
         binding.btnPrevPage.setOnClickListener(this);
+
 
         // spinner for set selection
         val spinnerSets = binding.spinnerSets
@@ -189,21 +188,18 @@ class OverviewFragment : Fragment(), OnClickListener {
     }
 
     // buttons next page etc.
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.btnNextPage -> {
-                viewModel._cardFilter.nextPage()
-                // viewModel.getCardsForPage(viewModel.pageNumber())
-                viewModel.cards()
-            }
-            R.id.btnPrevPage -> {
-                viewModel._cardFilter.prevPage()
-                // viewModel.getCardsForPage(viewModel.pageNumber())
-                viewModel.cards()
-            }
-            else -> {
-            }
+    override fun onClick(v: View?) = when (v?.id) {
+        R.id.btnNextPage -> {
+            viewModel._cardFilter.nextPage()
+            // viewModel.getCardsForPage(viewModel.pageNumber())
+            viewModel.cards()
         }
+        R.id.btnPrevPage -> {
+            viewModel._cardFilter.prevPage()
+            // viewModel.getCardsForPage(viewModel.pageNumber())
+            viewModel.cards()
+        }
+        else -> {}
     }
 }
 

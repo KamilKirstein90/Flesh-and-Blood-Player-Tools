@@ -20,7 +20,7 @@ class StartGameDialogFragment : DialogFragment(), AdapterView.OnItemSelectedList
     private lateinit var gameFormatAdapter: ArrayAdapter<CharSequence>
     private lateinit var opponentHeroAdapter: ArrayAdapter<CharSequence>
     private lateinit var playerHeroAdapter: ArrayAdapter<CharSequence>
-    private val gameViewModel :GameViewModel by activityViewModels()
+    private val gameViewModel: GameViewModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {

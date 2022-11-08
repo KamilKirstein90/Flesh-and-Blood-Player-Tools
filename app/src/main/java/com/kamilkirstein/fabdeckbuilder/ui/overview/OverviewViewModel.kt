@@ -35,15 +35,15 @@ class OverviewViewModel : ViewModel() {
     val cards: LiveData<List<Data>> = _cards
 
     /**
-     * Call getMarsPhotos() on init so we can display status immediately.
+     * Call getCards() on init so we can display status immediately.
      */
     init {
         cards()
     }
 
     /**
-     * Gets Mars photos information from the Mars API Retrofit service and updates the
-     * [MarsPhoto] [List] [LiveData].
+     * Gets Card information from the FabDB API Retrofit service and updates the
+     * [Cards] [List] [LiveData].
      */
     public fun cards() {
         viewModelScope.launch {

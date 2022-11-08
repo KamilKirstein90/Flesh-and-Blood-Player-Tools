@@ -17,7 +17,6 @@ public  class CardFilter()
     var _cost : Cost? = null // only 0, 1, 2, 3, 4+ // enum cost
     var _rarity: Rarity? = null // only C, R, S, T, L, F, P // enum rarity
 
-
     // the next two values are values that are only used in the
     // keyWordString with the KEY_WORDS_ATTACK, KEY_WORDS_DEFFENSE  =<> to get cards with the given
     // attack and defense value
@@ -28,12 +27,12 @@ public  class CardFilter()
     public fun nextPage(){
         ++_pageNumber
     }
+
     public fun prevPage(){
         if(_pageNumber == 1)
             return;
         --_pageNumber;
     }
-
 
     public fun createKeyWordString()
     {
@@ -41,7 +40,6 @@ public  class CardFilter()
 
         if (_keyWords.contains(KeyWords.KEYWORDS_ALL))
             return;
-
 
         // create value for key keywords like : ["mechanologist","action","item"]
         for (e in _keyWords)
